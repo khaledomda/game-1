@@ -41,11 +41,14 @@ export class Game {
     this.loop = this.loop.bind(this);
     this.onPointer = this.onPointer.bind(this);
     this.onKey = this.onKey.bind(this);
+    this.preventScroll = (e) => { if (this.state === 'play') e.preventDefault(); };
     this.onVis = () => { if (document.hidden && this.state === 'play') this.pause(); };
 
     window.addEventListener('resize', this.resize);
-    canvas.addEventListener('pointerdown', this.onPointer);
-    canvas.addEventListener('pointermove', this.onPointer);
+    // Listen on the window so steering works wherever the finger is, even over HUD layers.
+    window.addEventListener('pointerdown', this.onPointer);
+    window.addEventListener('pointermove', this.onPointer);
+    window.addEventListener('touchmove', this.preventScroll, { passive: false });
     window.addEventListener('keydown', this.onKey);
     window.addEventListener('keyup', this.onKey);
     document.addEventListener('visibilitychange', this.onVis);
@@ -154,8 +157,9 @@ export class Game {
     cancelAnimationFrame(this.raf);
     this.state = 'dead';
     window.removeEventListener('resize', this.resize);
-    this.canvas.removeEventListener('pointerdown', this.onPointer);
-    this.canvas.removeEventListener('pointermove', this.onPointer);
+    window.removeEventListener('pointerdown', this.onPointer);
+    window.removeEventListener('pointermove', this.onPointer);
+    window.removeEventListener('touchmove', this.preventScroll);
     window.removeEventListener('keydown', this.onKey);
     window.removeEventListener('keyup', this.onKey);
     document.removeEventListener('visibilitychange', this.onVis);
@@ -164,6 +168,8 @@ export class Game {
   // ---------- Input ----------
   onPointer(e) {
     if (this.state !== 'play') return;
+    // Taps on HUD buttons (pause, power) must not steer.
+    if (e.target?.closest?.('button')) return;
     // Touch drags and plain mouse hover both steer.
     const r = this.canvas.getBoundingClientRect();
     this.hero.tx = clamp(e.clientX - r.left, this.heroSize * 0.4, this.W - this.heroSize * 0.4);

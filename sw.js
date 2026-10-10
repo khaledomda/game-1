@@ -1,5 +1,5 @@
 // Offline-first service worker: the whole game works without internet after the first visit.
-const VERSION = 'vitaland-v1';
+const VERSION = 'vitaland-v2';
 const SHELL = [
   './',
   'index.html',
@@ -34,17 +34,16 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   const isFont = url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com');
   if (url.origin !== location.origin && !isFont) return;
-  // Stale-while-revalidate: instant from cache, refreshed in the background.
+  // Network first so updates show up immediately; cache is the offline fallback.
   e.respondWith(
-    caches.open(VERSION).then(async (cache) => {
-      const cached = await cache.match(req, { ignoreSearch: true });
-      const network = fetch(req)
-        .then((res) => {
-          if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone());
-          return res;
-        })
-        .catch(() => cached);
-      return cached || network;
-    }),
+    fetch(req)
+      .then((res) => {
+        if (res && (res.ok || res.type === 'opaque')) {
+          const copy = res.clone();
+          caches.open(VERSION).then((c) => c.put(req, copy));
+        }
+        return res;
+      })
+      .catch(() => caches.match(req, { ignoreSearch: true })),
   );
 });
