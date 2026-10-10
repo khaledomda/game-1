@@ -1,0 +1,8 @@
+{
+  "appId": "com.vitaland.game",
+  "appName": "Vitaland",
+  "webDir": "www",
+  "backgroundColor": "#6cc6ff",
+  "android": { "allowMixedContent": false },
+  "ios": { "contentInset": "never" }
+}

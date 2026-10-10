@@ -1,0 +1,20 @@
+{
+  "name": "Vitaland · فيتالاند",
+  "short_name": "Vitaland",
+  "description": "A bilingual sky adventure that helps kids choose healthy food over junk food.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#6cc6ff",
+  "theme_color": "#6cc6ff",
+  "lang": "ar",
+  "dir": "auto",
+  "categories": ["games", "kids", "education", "health"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Vitaland · فيتالاند</title>
+  <meta name="description" content="Vitaland — a bilingual (Arabic/English) sky adventure that helps kids 5–15 choose healthy food over junk food." />
+  <meta name="theme-color" content="#6cc6ff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Vitaland" />
+  <meta property="og:title" content="Vitaland · فيتالاند" />
+  <meta property="og:description" content="Fly high. Eat smart. Beat the Junk Fog! — حلّق عالياً. كُل بذكاء. اهزم ضباب الأكل الضار!" />
+  <meta property="og:image" content="icons/og.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="sky-bg" aria-hidden="true">
+    <span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span><span class="cloud c4"></span>
+  </div>
+  <canvas id="game" aria-label="game"></canvas>
+  <main id="ui"></main>
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true"></div>
+  <div id="toast" class="toast hidden"></div>
+  <noscript>Vitaland needs JavaScript. / فيتالاند تحتاج إلى جافاسكربت.</noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

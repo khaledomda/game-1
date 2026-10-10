@@ -1,0 +1,15 @@
+{
+  "name": "vitaland",
+  "version": "1.0.0",
+  "description": "Vitaland · فيتالاند — a bilingual healthy-eating sky adventure for kids aged 5–15.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes serve -l 5173 .",
+    "app:setup": "npm i -D @capacitor/cli @capacitor/core @capacitor/android @capacitor/ios && npm run app:sync && npx cap add android && npx cap add ios",
+    "app:sync": "node scripts/build-www.mjs && npx cap sync",
+    "app:android": "npm run app:sync && npx cap open android",
+    "app:ios": "npm run app:sync && npx cap open ios"
+  },
+  "license": "UNLICENSED"
+}
